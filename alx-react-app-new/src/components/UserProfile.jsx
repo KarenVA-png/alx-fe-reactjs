@@ -10,7 +10,7 @@ function UserProfile(props) {
       fontFamily: 'Arial, sans-serif'
     }}>
       <h2 style={{
-        color: '#2c3e50',
+        color: 'blue',  // Changed to exact "blue" as required
         marginTop: '0',
         borderBottom: '1px solid #eee',
         paddingBottom: '10px',
@@ -23,7 +23,7 @@ function UserProfile(props) {
         color: '#333',
         fontSize: '1rem'
       }}>
-        Age: <span style={{ fontWeight: 'bold' }}>{props.age}</span>
+        Age: <span style={{ fontWeight: 'bold', color: 'blue' }}>{props.age}</span>  // Added blue here too
       </p>
       <p style={{
         margin: '8px 0',
