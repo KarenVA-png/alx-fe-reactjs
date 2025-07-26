@@ -1,7 +1,17 @@
+// src/components/UserProfile.jsx
+import { useContext } from 'react';
+import UserContext from '../UserContext';
 import UserInfo from './UserInfo';
 
-function ProfilePage() {  // Removed prop
-  return <UserInfo />;   // Removed prop passing
+function UserProfile() {
+  const userData = useContext(UserContext);
+
+  return (
+    <div>
+      <h2>Welcome, {userData.name}</h2>
+      <UserInfo />
+    </div>
+  );
 }
 
-export default ProfilePage;
+export default UserProfile;

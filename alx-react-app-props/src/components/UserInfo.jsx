@@ -1,4 +1,5 @@
-import UserDetails from './MainContent'; // you already have MainContent.jsx
+// src/components/UserInfo.jsx
+import UserDetails from './UserDetails';
 
 function UserInfo() {
   return <UserDetails />;
