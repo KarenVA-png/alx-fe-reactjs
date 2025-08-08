@@ -8,7 +8,10 @@ function Contact() {
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
   const handleSubmit = (e) => {
@@ -19,16 +22,21 @@ function Contact() {
 
   return (
     <div style={{ 
-      padding: '40px',
-      maxWidth: '600px',
-      margin: '0 auto'
+      padding: '2rem', 
+      maxWidth: '600px', 
+      margin: '0 auto',
+      backgroundColor: '#f8f9fa',
+      borderRadius: '8px'
     }}>
-      <h1 style={{ color: '#2c3e50' }}>Contact Us</h1>
-      <form onSubmit={handleSubmit} style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '15px'
-      }}>
+      <h1 style={{ color: '#2c3e50', marginBottom: '1rem' }}>Contact Us</h1>
+      <form 
+        onSubmit={handleSubmit}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1rem'
+        }}
+      >
         <input
           type="text"
           name="name"
@@ -36,10 +44,10 @@ function Contact() {
           value={formData.name}
           onChange={handleChange}
           required
-          style={{
-            padding: '10px',
-            borderRadius: '4px',
-            border: '1px solid #ddd'
+          style={{ 
+            padding: '0.75rem',
+            border: '1px solid #ddd',
+            borderRadius: '4px'
           }}
         />
         <input
@@ -49,35 +57,38 @@ function Contact() {
           value={formData.email}
           onChange={handleChange}
           required
-          style={{
-            padding: '10px',
-            borderRadius: '4px',
-            border: '1px solid #ddd'
+          style={{ 
+            padding: '0.75rem',
+            border: '1px solid #ddd',
+            borderRadius: '4px'
           }}
         />
         <textarea
           name="message"
           placeholder="Your Message"
+          rows="5"
           value={formData.message}
           onChange={handleChange}
-          rows="5"
-          style={{
-            padding: '10px',
-            borderRadius: '4px',
-            border: '1px solid #ddd'
+          style={{ 
+            padding: '0.75rem',
+            border: '1px solid #ddd',
+            borderRadius: '4px'
           }}
         />
         <button 
           type="submit"
           style={{
-            padding: '12px',
-            backgroundColor: '#3498db',
+            padding: '0.75rem',
+            backgroundColor: '#2c3e50',
             color: 'white',
             border: 'none',
             borderRadius: '4px',
             cursor: 'pointer',
-            fontSize: '1rem'
+            fontSize: '1rem',
+            transition: 'background-color 0.3s'
           }}
+          onMouseOver={(e) => e.target.style.backgroundColor = '#34495e'}
+          onMouseOut={(e) => e.target.style.backgroundColor = '#2c3e50'}
         >
           Send Message
         </button>
