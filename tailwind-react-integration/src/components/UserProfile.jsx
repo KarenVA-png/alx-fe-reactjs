@@ -9,7 +9,7 @@ function UserProfile() {
       <img
         src={user.avatar || "https://via.placeholder.com/150"}
         alt={user.name || "User"}
-        className="rounded-full w-36 h-36 mx-auto"
+        className="[ rounded-full max-w-xs" "md:max-w-sm w-36 h-36 mx-auto"
       />
       <h1 className="text-xl text-blue-800 my-4">{user.name || "John Doe"}</h1>
       <p className="text-gray-600 text-base">
