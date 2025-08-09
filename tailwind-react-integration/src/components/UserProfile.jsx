@@ -1,4 +1,3 @@
-
 import React, { useContext } from "react";
 import { UserContext } from "./UserContext";
 
@@ -16,7 +15,8 @@ function UserProfile() {
         src={user.avatar || "https://via.placeholder.com/150"}
         alt={user.name || "User"}
         className="
-          rounded-full w-32 h-32 sm:w-24 sm:h-24 md:w-36 md:h-36 mx-auto
+          rounded-full max-w-xs md:max-w-sm
+          w-32 h-32 sm:w-24 sm:h-24 md:w-36 md:h-36 mx-auto
           transform transition-transform duration-300 ease-in-out hover:scale-110
         "
       />
@@ -40,3 +40,4 @@ function UserProfile() {
 }
 
 export default UserProfile;
+
