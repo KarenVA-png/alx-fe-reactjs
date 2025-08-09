@@ -7,9 +7,11 @@ function UserProfile() {
   return (
     <div className="bg-gray-100 sm:p-4 md:p-8 max-w-sm mx-auto my-20 rounded-lg shadow-lg text-center">
       <img
+      className="rounded- full w-32 h-32 sm:w-24 sm:h-24  md:w-36 md:h-36 mx-auto"
         src={user.avatar || "https://via.placeholder.com/150"}
         alt={user.name || "User"}
         className="[ rounded-full max-w-xs" "md:max-w-sm w-36 h-36 mx-auto"
+
       />
       <h1 className="md:text-xl  text-blue-800 my-4""text-lg"  >{user.name || "John Doe"}</h1>
       <p className="text-gray-600 text-base">
