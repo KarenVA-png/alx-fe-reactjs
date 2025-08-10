@@ -1,22 +1,46 @@
 // src/components/RecipeList.jsx
 import React from 'react';
 import { useRecipeStore } from '../recipeStore';
+import { Link } from 'react-router-dom'; // ✅ Added import
 
 const RecipeList = () => {
-  const filteredRecipes = useRecipeStore((state) => state.filteredRecipes);
+  const { recipes, searchTerm, deleteRecipe } = useRecipeStore((state) => ({
+    recipes: state.recipes,
+    searchTerm: state.searchTerm,
+    deleteRecipe: state.deleteRecipe,
+  }));
+
+  const filteredRecipes = recipes.filter((recipe) =>
+    recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div>
-      {filteredRecipes.length === 0 ? (
-        <p>No recipes found.</p>
-      ) : (
-        filteredRecipes.map((recipe, index) => (
-          <div key={index} style={{ borderBottom: '1px solid #ddd', padding: '8px 0' }}>
-            <h3>{recipe.title}</h3>
-            <p>{recipe.description}</p>
-          </div>
-        ))
-      )}
+      <h2>Recipe List</h2>
+      <ul style={{ listStyleType: 'none', padding: 0 }}>
+        {filteredRecipes.map((recipe) => (
+          <li
+            key={recipe.id}
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '8px',
+            }}
+          >
+            {/* ✅ Use Link for navigation */}
+            <Link to={`/recipe/${recipe.id}`} style={{ textDecoration: 'none', color: 'blue' }}>
+              {recipe.name}
+            </Link>
+            <div>
+              <Link to={`/edit/${recipe.id}`} style={{ marginRight: '10px' }}>
+                Edit
+              </Link>
+              <button onClick={() => deleteRecipe(recipe.id)}>Delete</button>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
