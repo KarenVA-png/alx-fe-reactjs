@@ -4,17 +4,28 @@ export default function RegistrationForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setErrors({});
     setSuccess("");
 
-    // validation
-    if (!username || !email || !password) {
-      setError("All fields are required!");
+    let newErrors = {};
+
+    if (!username) {
+      newErrors.username = "Username is required";
+    }
+    if (!email) {
+      newErrors.email = "Email is required";
+    }
+    if (!password) {
+      newErrors.password = "Password is required";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
@@ -31,15 +42,15 @@ export default function RegistrationForm() {
         setEmail("");
         setPassword("");
       } else {
-        setError("Failed to register user.");
+        setErrors({ api: "Failed to register user." });
       }
     } catch (err) {
-      setError("Network error. Try again.");
+      setErrors({ api: "Network error. Try again." });
     }
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "20px auto" }}>
+    <div style={{ maxWidth: "420px", margin: "24px auto", padding: 12 }}>
       <h2>Registration Form (Controlled)</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -49,6 +60,7 @@ export default function RegistrationForm() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
+        {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
         <br /><br />
 
         <input
@@ -58,6 +70,7 @@ export default function RegistrationForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
         <br /><br />
 
         <input
@@ -67,12 +80,13 @@ export default function RegistrationForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
         <br /><br />
 
         <button type="submit">Register</button>
       </form>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {errors.api && <p style={{ color: "red" }}>{errors.api}</p>}
       {success && <p style={{ color: "green" }}>{success}</p>}
     </div>
   );
