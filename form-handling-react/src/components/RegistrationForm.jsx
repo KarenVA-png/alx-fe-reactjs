@@ -1,21 +1,11 @@
 import React, { useState } from "react";
 
 export default function RegistrationForm() {
-  const [form, setForm] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
-  // handle input change
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,21 +13,23 @@ export default function RegistrationForm() {
     setSuccess("");
 
     // validation
-    if (!form.username || !form.email || !form.password) {
+    if (!username || !email || !password) {
       setError("All fields are required!");
       return;
     }
 
     try {
-      // simulate API call
       const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ username, email, password }),
       });
+
       if (res.ok) {
         setSuccess("User registered successfully!");
-        setForm({ username: "", email: "", password: "" });
+        setUsername("");
+        setEmail("");
+        setPassword("");
       } else {
         setError("Failed to register user.");
       }
@@ -54,28 +46,32 @@ export default function RegistrationForm() {
           type="text"
           name="username"
           placeholder="Username"
-          value={form.username}
-          onChange={handleChange}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <br /><br />
+
         <input
           type="email"
           name="email"
           placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <br /><br />
+
         <input
           type="password"
           name="password"
           placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <br /><br />
+
         <button type="submit">Register</button>
       </form>
+
       {error && <p style={{ color: "red" }}>{error}</p>}
       {success && <p style={{ color: "green" }}>{success}</p>}
     </div>
