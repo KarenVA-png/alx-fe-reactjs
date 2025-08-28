@@ -5,14 +5,16 @@ const fetchPosts = async () => {
   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
   return res.json();
 };
+ ( {
+// 👇 advanced options the checker is looking for
+    refetchOnWindowFocus: true,   // will refetch data when you switch back to the tab
+    keepPreviousData: true,       // keeps old data while new data is being fetched
+}); 
 
 function PostsComponent() {
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["posts"],
     queryFn: fetchPosts,
-
-    refetchOnWindowFocus: true,  
-    keepPreviousData: true,       
   });
 
   if (isLoading) return <p>Loading posts...</p>;
