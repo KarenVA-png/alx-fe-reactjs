@@ -3,22 +3,23 @@ import { useQuery } from "@tanstack/react-query";
 
 const fetchPosts = async () => {
   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  if (!res.ok) {
+    throw new Error("Network response was not ok");
+  }
   return res.json();
 };
- ( {
-// 👇 advanced options the checker is looking for
-    refetchOnWindowFocus: true,   // will refetch data when you switch back to the tab
-    keepPreviousData: true,       // keeps old data while new data is being fetched
-}); 
 
 function PostsComponent() {
-  const { data, isLoading, isError, refetch } = useQuery({
+  const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["posts"],
     queryFn: fetchPosts,
+    // 👇 advanced options
+    refetchOnWindowFocus: true,   // refetch when tab becomes active
+    keepPreviousData: true,       // keep old data while fetching new
   });
 
   if (isLoading) return <p>Loading posts...</p>;
-  if (isError) return <p>Error fetching posts</p>;
+  if (isError) return <p>Error: {error.message}</p>;
 
   return (
     <div>
