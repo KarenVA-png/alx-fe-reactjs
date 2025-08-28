@@ -16,6 +16,8 @@ function PostsComponent() {
     // 👇 advanced options
     refetchOnWindowFocus: true,   // refetch when tab becomes active
     keepPreviousData: true,       // keep old data while fetching new
+    staleTime: 1000 * 60 * 5,     // data considered fresh for 5 minutes
+    cacheTime: 1000 * 60 * 10,    // unused data stays in cache for 10 minutes
   });
 
   if (isLoading) return <p>Loading posts...</p>;
